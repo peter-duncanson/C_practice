@@ -58,22 +58,22 @@ void test_char(char c) {
 // - reverse the byte order (0xFECA)
 // - rotate fourbits (0xECAF)
 void bit_ops() {
-// 0000
-// 0001
-// 0010
-// 0011
-// 0100
-// 0101
-// 0110
-// 0111
-// 1000 8
-// 1001 9
-// 1010 A
-// 1011 B
-// 1100 C
-// 1101 D
-// 1110 E
-// 1111 F
+    // 0000
+    // 0001
+    // 0010
+    // 0011
+    // 0100
+    // 0101
+    // 0110
+    // 0111
+    // 1000 8
+    // 1001 9
+    // 1010 A
+    // 1011 B
+    // 1100 C
+    // 1101 D
+    // 1110 E
+    // 1111 F
     // val = 1100 1010 1111 1110
     int val = 0xCAFE;
 
@@ -85,11 +85,34 @@ void bit_ops() {
     //  -> = 1111 1110 1100 1010
     printf("reversed bytes (should be FECA): %X\n", rev_bytes);
 
-    int fourbits = val << 3 | val >> 1;
+    // val = 1100 1010 1111 1110
+    // ->  = 1110 1100 1010 1111
+    int fourbits = ((val & 0xFFF0) >> 4) | ((val & 0x000F) << 12);
     printf("fourbits (should be ECAF): %X\n", fourbits);
 }
 
-int main() {
-    bit_ops();
+// Problem 2.4
+// using precidence rules, evaluage the following expressions and determine the value of the
+// variables (without running the code) also write them using paranthesis to make the order
+// explicit.
+// - Assume (x=0xFF33, MASK=0xFF00) Expression: c=x & MASK == 0;
+//      c = (x & MASK) == 0 -> c = 0
+// - Assume (x=10, y=2, z=2) Expression: z=y=x++ + ++y*2;
+//      z = (y = (x = 10) + 1) + ((y + 1) * 2) -> z = 11 + 5 -> z = 16
+// - Assume (x=10, y=4, z=1) Expression: y>>=x&0x2 && z
+//      y >>= ((0x1010 & 0x2000) && 0x001) -> y >>= 1 -> y = 4
+//
+//
+// Problem 2.5
+// Determine if the following statement have any errors. If so, highlight them and explain why.
+// - int 2nd_value = 10; <- cant start a variable with a number.
+// - Assume (x=0, y=0, alliszero=1) -> alliszero=(x=1) && (y=0); 
+//      -> error because we have a logical operator between two assignment operators.
+//
+// - Assume that we want to test if last four bits of x are on. 
+//      int MASK=0xF; (ison=x&MASK == MASK)
+//      this is correct
+
+int main(void) {
     return 0;
 }

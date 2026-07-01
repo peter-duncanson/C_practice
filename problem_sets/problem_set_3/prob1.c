@@ -5,13 +5,12 @@
 #define NMAX 25
 static unsigned int results_buffer[NMAX];
 
-void fibonacci()
-{
+void fibonacci(void) {
 	/* here are the variables to set as registers */
-	unsigned int a = 0;
-	unsigned int b = 1;
-	unsigned int c;
-	int n;
+	register unsigned int a = 0;
+	register unsigned int b = 1;
+	register unsigned int c;
+	register int n;
 
 	/* do not edit below this line */
 	results_buffer[0] = a;
