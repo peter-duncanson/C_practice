@@ -24,7 +24,7 @@ void find_largest() {
 
 void gcd() {
     // Project 2
-    // Write a program that asks the user to enter two integers,
+    // Write a program that asks the user to enter two integers,               i
     // then calculates and displays their GCD
     // using Euclid's algorithm:
     int i, j;
