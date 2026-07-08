@@ -44,6 +44,7 @@ void repeated_digit_display(void) {
 // (2) Modify the <repdigit.c> program in Section 8.1 so that it prints a table
 // showing how many times each digit appears in the number.
 void repeated_digit_table(void) {
+
     // Table will look something like this
     // Digit    Occurances
     // 0            X
@@ -428,27 +429,26 @@ void random_walk(void) {
     srand((unsigned) time(NULL));
 
     // variables to track position
-    unsigned int i, j, direction = 0;
+    int i = 0;
+    int j = 0;
+    int direction = 0;
 
-    for (char letter = 'A'; letter <= 'Z'; letter++) {
+    // initialize element 0 as A
+    a[i][j] = 'A';
 
+    for (char letter = 'B'; letter <= 'Z'; letter++) {
 
         try:
-
-            int stuck = 
-                a[i + 1][j + 1] != '.' && 
-                a[i - 1][j - 1] != '.' && 
-                a[i + 1][j - 1] != '.' && 
-                a[i - 1][j + 1] != '.';
-
-            if (stuck) {
+            if ((a[i + 1][j + 1] != '.') &&
+                (a[i - 1][j - 1] != '.') && 
+                (a[i + 1][j - 1] != '.') && 
+                (a[i - 1][j + 1] != '.')) {
                 break;
             }
 
             direction = rand() % 4;
-
             switch (direction) {
-                case 0:
+                case 0: // north
                     if (i > 0 && a[i - 1][j] == '.') {
                         i -= 1;
                         a[i][j] = letter;
@@ -457,8 +457,8 @@ void random_walk(void) {
                     else {
                         goto try;
                     }
-                case 1:
-                    if (i < 9 && a[i][j + 1] == '.') {
+                case 1: // east
+                    if (j < 9 && a[i][j + 1] == '.') {
                         j += 1;
                         a[i][j] = letter;
                         break;
@@ -466,7 +466,7 @@ void random_walk(void) {
                     else {
                         goto try;
                     }
-                case 2:
+                case 2: // south
                     if (i < 9 && a[i + 1][j] == '.') {
                         i += 1;
                         a[i][j] = letter;
@@ -475,7 +475,7 @@ void random_walk(void) {
                     else {
                         goto try;
                     }
-                case 3:
+                case 3: // west
                     if (j > 0 && a[i][j - 1] == '.') {
                         j -= 1;
                         a[i][j] = letter;
@@ -494,4 +494,8 @@ void random_walk(void) {
     }
 
 }
+//==============================================================================
+
+//==============================================================================
+// (10) 
 //==============================================================================
