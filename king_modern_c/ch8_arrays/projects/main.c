@@ -21,7 +21,8 @@ int main(void) {
     // format_name();
     // reverse_sentence();
     // caesar_cipher();
-    is_anagram();
+    // is_anagram();
+    magic_square();
 
     return 0;
 }

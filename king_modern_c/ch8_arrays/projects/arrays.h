@@ -14,3 +14,4 @@ void format_name(void);            // 13
 void reverse_sentence(void);       // 14
 void caesar_cipher(void);          // 15
 void is_anagram(void);             // 16
+void magic_square(void);           // 17

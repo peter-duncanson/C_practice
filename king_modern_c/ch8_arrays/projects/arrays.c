@@ -7,14 +7,12 @@
 // (1) Modify the <repdigit.c> program in Section 8.1 so that it shows which
 // digits (if any) were repeated.
 void repeated_digit_display(void) {
-
     // create array to track which digits have been seen
     // in order to track specfic repeats, using:
     // 0 = not seen
     // 1 = seen once
     // 2 = seen more than once
     int i, seen_digits[10] = { 0 };
-
     long n;
 
     printf("Enter a number: ");
@@ -859,6 +857,92 @@ void caesar_cipher(void) {
 // The words are not anagrams.
 // -----------------------------------------------------------------------------
 void is_anagram(void) {
+
+    int c;
+    int first_letters[26] = { 0 };
+    int second_letters[26] = { 0 };
+
+    printf("Enter first word: ");
+    while ((c = getchar()) != '\n') {
+        c = toupper(c);
+        first_letters[c - 65] += 1;
+    }
+
+    printf("Enter second word: ");
+    while ((c = getchar()) != '\n') {
+        c = toupper(c);
+        second_letters[c - 65] += 1;
+    }
+
+    for (c = 0; c < 26; c++) {
+        if (first_letters[c] != second_letters[(int) c]) {
+            printf("The words are not anagrams.\n");
+            return;
+        }
+    }
+
+    printf("The words are anagrams.\n");
+
+}
+//==============================================================================
+
+//==============================================================================
+// (17) Write a program that prints an n x n magic square (A square arrangement
+// of the numbers 1, 2, ... ,n^2 in which the sums of the rows, columns and
+// diagonals are all the same) The user will specify the value of n:
+// -----------------------------------------------------------------------------
+// This program creates a magic square of a specificed size.
+// The size must be an odd number between 1 and 99.
+// Enter size of magic square: 5
+// 17  24   1   8  15
+// 23   5   7  14  16
+//  4   6  13  20  22
+// 10  12  19  21   3
+// 11  18  25   2   9
+void magic_square(void) {
+
+    int n, i, j, k;
+
+    printf("This program creates a magic square of a specified size\n");
+    printf("The size must be an odd number between 1 and 99\n");
+    printf("Enter size of magic square: ");
+    scanf("%d", &n);
+    
+    int a[n][n];
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            a[i][j] = 0;
+        }
+    }
+
+    i = 0;
+    j = n / 2;
+
+    for (k = 1; k <= (n * n); k++) {
+
+        a[i][j] = k;
+
+        i--;
+        j++;
+
+        if (k % n == 0) {
+            i += 2;
+            j--;
+        }
+        if (i < 0) {
+            i = (n - 1);
+        }
+        if (j == n) {
+            j = 0;
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            printf("%2d ", a[i][j]);
+        }
+        puts("");
+    }
 
 }
 //==============================================================================
