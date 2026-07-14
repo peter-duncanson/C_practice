@@ -177,7 +177,16 @@ else c = 10;
 // Write a simpler, shorter statement that accomplishes the same result.
 // -----------------------------------------------------------------------------
 // =============================================================================
-//
+
+// gets the relative order of three numbers, prioritizes order xyz when equal.
+// If all equal, will be same result as xyz.
+if (x <= y && y <= z) c = 1;
+else if (x <= z && z <= y) c = 2;
+else if (y <= x && x <= x) c = 3;
+else if (y <= z && z <= x) c = 4;
+else if (z <= x && x <= y) c = 5;
+else if (z <= y && y <= x) c = 5;
+
 // =============================================================================
 // (4) The following C function calculates the cube root of a real number (by
 // the Newton approximation), using the fact that, if y is one approximation to
@@ -187,20 +196,20 @@ else c = 10;
 //
 // is a closer approximation.
 //
-// doube fcn(double stuff)
-// { double april, tim, tiny, shadow, tom, tam, square;
-// bool flag;
-// tim = stuff; tam = stuff; tiny = 0.00001;
-// if (stuff != 0) do { (shadow = tim = tim;
-// square = tim * tim;
-// tom = (shadow + stuff / square);
-// april = tom / 3;
-// if (april * april * april - tam > -tiny)
-// if (april * april * april - tam < -tiny) flag = true;
-// else flag = false; else flag = false;
-// if (flag == false) tim = april; else tim = tam; }
-// while (flag == false);
-// if (stuff == 0) return(stuff); else return(april); }
+doube fcn(double stuff)
+{ double april, tim, tiny, shadow, tom, tam, square;
+bool flag;
+tim = stuff; tam = stuff; tiny = 0.00001;
+if (stuff != 0) do { (shadow = tim + tim;
+square = tim * tim;
+tom = (shadow + stuff / square);
+april = tom / 3;
+if (april * april * april - tam > -tiny)
+if (april * april * april - tam < -tiny) flag = true;
+else flag = false; else flag = false;
+if (flag == false) tim = april; else tim = tam; }
+while (flag == false);
+if (stuff == 0) return(stuff); else return(april); }
 //
 // -----------------------------------------------------------------------------
 // (a) -------------------------------------------------------------------------
@@ -208,7 +217,34 @@ else c = 10;
 // variables that contribute nothing to the understanding, with a better layout,
 // and without the redundant and useless statements.
 // -----------------------------------------------------------------------------
-//
+
+double cube_root(double x)
+{ 
+    double z, y, limit, check;
+    bool flag;
+
+    y = x; 
+    limit = 0.00001;
+
+    if (x != 0) do
+    {
+        // Newton iteration
+        z = ((y + y) + (x / (y * y))) / 3;
+
+        // how close are we?
+        check = z * z * z - x;
+
+        // if close enough, get ready to break
+        if (-limit < check && check < limit) flag = true;
+
+        // if not, go again
+        y = z;
+    }
+    while (flag == false);
+
+    return (x == 0) ? x : y;
+}
+
 // -----------------------------------------------------------------------------
 // (b) -------------------------------------------------------------------------
 // Write a function for calculating the cube root directly from the mathemetical
