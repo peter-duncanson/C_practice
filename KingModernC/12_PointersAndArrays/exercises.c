@@ -99,10 +99,10 @@
 // assignment p = a has just been performed, which of the following expressions are illegal becasue
 // of mismatched types? Of the remaining expressions, which are true (have a nonzero value)?
 //
-// (a) p == a[0];       <- illegal
+// (a) p == a[0];       <- illegal, comparison between pointer and integer, compiles w/ warning
 // (b) p == &a[0];      <- legal, and true
 // (c) *p == a[0];      <- legal, and true
-// (d) p[0] == a[0];    <- 
+// (d) p[0] == a[0];    <- legal, and true
 // ================================================================================================
 
 // ================================================================================================
@@ -120,6 +120,19 @@
 //
 //      return sum;
 // }
+//
+// int sum_array(const int *a, int n)
+// {
+//     int sum = 0;
+//     const int *p;
+//
+//     for (p = a; p < a + n; p++)
+//     {
+//         sum += *p;
+//     }
+//     return sum;
+// }
+//
 // ================================================================================================
 
 // ================================================================================================
@@ -130,6 +143,15 @@
 // a is an array to be searched, n is the number of elements in the array, and key is the search
 // key. search() should return true if key matches some element of a, and false if it doesn't. Use
 // pointer arithmetic, not subscripting, to visit array elements.
+//
+// bool search(const int *a, int n, int key)
+// {
+//     for (const int *p = a; p < a + n; p++)
+//     {
+//         if (*p == key) return true;
+//     }
+//     return false;
+// }
 // ================================================================================================
 
 // ================================================================================================
@@ -144,6 +166,12 @@
 //      for (i = 0; i < n; i++)
 //          a[i] = 0;
 // }
+//
+// void store_zeros(int *a, int n)
+// {
+//      for (int *p = a; p < a + n; p++)
+//          *p = 0;
+// }
 // ================================================================================================
 
 // ================================================================================================
@@ -154,15 +182,54 @@
 // a and b both point to arrays of length n, The function should return:
 // a[0] * b[0] + a[1] * b[1] + ... + a[n - 1] * b[n - 1]
 // Use pointer arithmetic, not array subscripting, to visit array elements.
+//
+// double inner_product(const double *a, const double *b, int n)
+// {
+//     const double *ptr_a;
+//     const double *ptr_b = b;
+//     double ans;
+//
+//     for (ptr_a = a; ptr_a < a + n; ptr_a++)
+//     {
+//         ans += (*ptr_a) * (*ptr_b++);
+//     }
+//     return ans;
+// }
 // ================================================================================================
 
 // ================================================================================================
 // (10) Modify the find_middle() function of section 11.5 so that it uses pointer arithmetic to
 // calculate the return value.
+//
+// From seciton 11.5 ->
+//
+// int *find_middle(int a[], int n)
+// {
+//      return &a[n / 2];
+// }
+//
+// int *find_middle(int *a, int n)
+// {
+//      return a + n / 2;
+// }
+//
 // ================================================================================================
 
 // ================================================================================================
 // (11) Modify the find_largest() function so that it uses pointer arithmetic.
+//
+// int find_largest(int *a, int n)
+// {
+//     int *p, largest = *a;
+//
+//     for (p = a + 1; p < a + n; p++)
+//     {
+//         if (*p > largest)
+//             largest = *p;
+//     }
+//     return largest;
+// }
+//
 // ================================================================================================
 
 // ================================================================================================
@@ -173,12 +240,67 @@
 // a points to an array of length n. The function searches the array for its largest and second
 // largest elements, storing them in the variables pointed to by largest and second_largest,
 // respectively. Use pointer arithmetic.
+//
+//
+// void find_two_largest(const int *a, int n, int *largest, int *second_largest)
+// {
+//     int i = 1;
+//     *largest = *a;
+//     *second_largest = *a;
+//
+//     while (i < n)
+//     {
+//         if (*(a + i) > *largest)
+//         {
+//             *second_largest = *largest;
+//             *largest = *(a + i);
+//
+//         }
+//         else if (*(a + i) > *second_largest && *(a + i) != *largest)
+//         {
+//             *second_largest = *(a + i);
+//         }
+//         i++;
+//     }
+// }
+//
 // ================================================================================================
 
 // ================================================================================================
 // (13) Section 8.2 had a program fragment in which two nested for loops initialized the array
 // ident for use as an identity matrix. Rewrite the code, using a single pointer to step through
 // the array one element at a time. Hint: the first element of the array should be 1...
+//
+// From section 8.2 ->
+//
+// #define N 10
+//
+// double ident[N][N];
+// int row, col;
+//
+// for (row = 0; row < N; row++)
+//     for (col - 0; col < N; col++)
+//         if (row == col)
+//             ident[row][col] = 1.0;
+//         else
+//             ident[row][col] = 0.0;
+//
+// double id_matrix[N][N];
+// int i = 0;
+//
+// for (double *aptr = &id_matrix[0][0]; aptr < &id_matrix[0][0] + N * N; aptr++)
+// {
+//     if (aptr == id_matrix[i] + i)
+//     {
+//         *aptr = 1.0;
+//         i++;
+//     }
+//     else 
+//     {
+//         *aptr = 0.0;
+//     }
+// }
+//
 // ================================================================================================
 
 // ================================================================================================
