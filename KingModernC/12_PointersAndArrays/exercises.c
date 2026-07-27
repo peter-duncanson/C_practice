@@ -297,7 +297,6 @@
 // int temperatures[7][24];
 // Write a statement that uses the search function from exercise 7 to search the entire
 // temperatures array for the value 32.
-<<<<<<< HEAD
 // 
 // void print_array_twod(int *a, int rows, int cols)
 // {
@@ -338,13 +337,11 @@
 // {
 //     puts("false");
 // }
-=======
 //
 // for (int i = 0; i < 7; i++)
 //     if (search(temeratures, 24, 32)) 
 //         printf("Found\n");
 //
->>>>>>> ec3bd4e18a7c853e614d83e49368a5ec39e4edb5
 // ================================================================================================
 
 // ================================================================================================
@@ -407,4 +404,9 @@
 // ================================================================================================
 // (18) Write the evaluate_position() function from exercise 13 in chapter 9 using pointer
 // arithmetic, and a single loop instead of nested loops.
+
+int evaluate_position(char **board)
+{
+    
+}
 // ================================================================================================
