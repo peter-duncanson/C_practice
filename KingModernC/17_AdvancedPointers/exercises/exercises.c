@@ -35,3 +35,20 @@ int *create_array(int n, int initial_value)
         *p = initial_value;
     return array;
 }
+
+// exercise 4
+// struct point { int x, y; };
+// struct rectangle { struct point upper_left, bottom_right; };
+// struct rectangle *p;
+//
+// p = malloc(sizeof(struct rectangle));
+//
+// p->upper_left.x = 10;
+// p->upper_left.y = 25;
+// p->bottom_right.x = 20;
+// p->bottom_right.y = 15;
+//
+// printf("%d %d\n%d %d\n",
+//         p->upper_left.x, p->upper_left.y, p->bottom_right.x, p->bottom_right.y);
+//
+// free(p);

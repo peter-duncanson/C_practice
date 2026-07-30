@@ -6,11 +6,18 @@ void print_array(int *a, int n);
 
 int main(void)
 {
-    int *a = create_array(10, 500);
-    
-    print_array(a, 10);
+    struct
+    {
+        union
+        {
+            char a, b;
+            int c;
+        } d;
+        int e[5];
+    } f, *p = &f;
 
-    free(a);
+    p->d->c = 20;
+    printf("%d\n", p->d->c);
 
     return 0;
 }
