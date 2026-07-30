@@ -2,11 +2,11 @@
 
 int main(void)
 {
-    int row, col;
+    int row, col, row_size, col_size;
     Grid map;
     Grid newmap;
-    init(map);
-    write_map(map);
+    init(map, &row_size, &col_size);
+    write_map(map, row_size, col_size);
 
     printf("This is the initial configuration you have chosen.\n"
            "Press < Enter > to continue\n");
@@ -14,9 +14,9 @@ int main(void)
 
     do
     {
-        for (row = 1; row <= MAXROW; row++)
+        for (row = 1; row <= row_size; row++)
         {
-            for (col = 1; col <= MAXCOL; col++)
+            for (col = 1; col <= col_size; col++)
             {
                 switch (neighbor_count(map, row, col))
                 {
@@ -40,10 +40,10 @@ int main(void)
                 }
             }
         }
-        copy_map(map, newmap);
-        write_map(map);
-        usleep(500000);
-        // printf("Do you wish to continue?");
+        copy_map(map, newmap, row_size, col_size);
+        write_map(map, row_size, col_size);
+        // usleep(500000);
+        printf("Do you wish to continue?");
 
-    } while (true);
+    } while (generate_next());
 }
