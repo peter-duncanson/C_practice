@@ -1,11 +1,16 @@
 #include "life.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
     int row, col, row_size, col_size;
     Grid map;
     Grid newmap;
-    init(map, &row_size, &col_size);
+
+
+    if (argc == 2) init_from_file(map, &row_size, &col_size, argv[1]);
+    else init(map, &row_size, &col_size);
+
+    printf("Rows: %d\nCols: %d", row_size, col_size);
     write_map(map, row_size, col_size);
 
     printf("This is the initial configuration you have chosen.\n"

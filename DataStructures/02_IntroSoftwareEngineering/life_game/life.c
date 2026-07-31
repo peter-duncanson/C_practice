@@ -28,7 +28,36 @@ bool generate_next(void)
     } while (1);
 }
 
-void init(Grid map, int *row_size, int *col_size, FILE *fptr)
+void init_from_file(Grid map, int *row_size, int *col_size, char *file_name)
+{
+    FILE *fptr = fopen(file_name, "r");
+
+    if (fptr == NULL)
+    {
+        printf("Error opening file.\n");
+        exit(1);
+    }
+
+    int i = 0, j = 0, c = 0;
+
+    while ((c = fgetc(fptr)) != EOF)
+    {
+        if (c == '\n')
+        {
+            i++;
+            *col_size = j;
+            j = 0;
+            continue;
+        }
+        else if (c == '*') map[i][j++] = ALIVE;
+        else if (c == ' ') map[i][j++] = DEAD;
+        else printf("ERROR");
+    }
+    *row_size = i;
+    fclose(fptr);
+}
+
+void init(Grid map, int *row_size, int *col_size)
 {
     int row, col;
     char c;
@@ -55,7 +84,7 @@ void init(Grid map, int *row_size, int *col_size, FILE *fptr)
         }
     }
 
-    if (fptr == NULL)
+    if (flag)
     {
         printf("Enter each row of the grid using space for dead cells and x for alive cells.\n");
         for (row = 1; row <= *row_size; row++)
