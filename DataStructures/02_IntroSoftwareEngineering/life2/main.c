@@ -22,13 +22,23 @@ int main(void)
 
     while (user_says_yes())
     {
+        // uses n_neighbors, changes map and newlive
         list_traverse(&maylive, vivify);
 
-
+        // uses n_neighbors, changes map and newdie
+        list_traverse(&maydie, kill);
+        
+        write_map(map);
         list_clear(&maylive);
         list_clear(&maydie);
         list_traverse(*newlive, add_neighbors);
 
-    }
+        // changes n_neighbors, maylive, maydie
+        list_traverse(&new_die, subtract_neighbors); 
+        list_clear(&newlive);
+        list_clear(&newdie);
 
+        printf("Do you want to continue viewing new generations?");
+    }
+    return 0;
 }

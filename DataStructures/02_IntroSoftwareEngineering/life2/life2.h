@@ -11,6 +11,7 @@ typedef struct cell
 {
     int row, col; // grid coordinates
 } Cell;
+
 typedef Cell ListEntry;
 
 bool user_says_yes(void);
